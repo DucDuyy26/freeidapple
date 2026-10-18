@@ -151,6 +151,52 @@ class="block h-[125px] w-full object-cover"
     <div class="border-t border-slate-100"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"><p>© <span id="year"></span> DUY STORE. Bảo lưu mọi quyền.</p></div></div>
   </footer>
 
+  
+<!-- TRANG CHI TIET SAN PHAM -->
+<section id="product-detail-page"
+  class="fixed inset-0 z-[80] hidden overflow-y-auto bg-[#3B0A18] p-4 sm:p-8">
+
+  <div class="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-[#F8E7EB] shadow-2xl">
+
+    <div class="flex items-center justify-between p-5">
+      <button id="detail-back"
+        class="rounded-xl bg-white px-4 py-2 font-bold text-[#7A1C34]">
+        ← Quay lại
+      </button>
+      <span class="font-extrabold text-[#7A1C34]">CHI TIẾT SẢN PHẨM</span>
+    </div>
+
+    <div class="grid gap-6 p-5 sm:grid-cols-2 sm:p-8">
+      <img id="detail-image" src="" alt="Ảnh sản phẩm"
+        class="w-full rounded-2xl object-cover">
+
+      <div class="flex flex-col">
+        <p id="detail-category"
+          class="text-sm font-bold text-[#9E2A47]"></p>
+
+        <h1 id="detail-name"
+          class="mt-2 text-3xl font-black text-[#7A1C34]"></h1>
+
+        <p id="detail-price"
+          class="mt-4 text-2xl font-black text-[#9E2A47]"></p>
+
+        <h2 class="mt-6 text-lg font-extrabold text-[#7A1C34]">
+          Mô tả sản phẩm
+        </h2>
+
+        <p id="detail-description"
+          class="mt-2 whitespace-pre-line leading-7 text-slate-700"></p>
+
+        <button id="detail-buy"
+          class="mt-8 rounded-xl bg-[#7A1C34] px-5 py-4 font-extrabold text-white shadow-lg hover:bg-[#9E2A47]">
+          MUA NGAY →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   <div id="buy-modal" class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="my-auto w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
       <div class="flex items-start justify-between gap-4">
@@ -309,24 +355,64 @@ ${p.externalLink
     }
 
 
-    productGrid.addEventListener("click", event => {
-      const button = event.target.closest("button[data-buy]");
-      if (!button) return;
-      activeProduct = PRODUCTS.find(p => p.id === Number(button.dataset.buy));
-      if (!activeProduct) return;
-      document.getElementById("modal-product").innerHTML = `
-        <div class="flex items-center gap-4">
-          <div class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${activeProduct.gradient} text-3xl">${activeProduct.emoji}</div>
-          <div class="min-w-0"><p class="font-extrabold">${activeProduct.name}</p><p class="mt-1 text-sm text-slate-500">${activeProduct.category}</p><p class="mt-1 font-black text-brand-700">${money(activeProduct.price)}</p></div>
-        </div>`;
-      document.getElementById("selected-product").value = activeProduct.id;
-      document.getElementById("order-result").classList.add("hidden");
-      document.getElementById("order-form").classList.remove("hidden");
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
-      document.body.classList.add("overflow-hidden");
-    });
+productGrid.addEventListener("click", event => {
+  const button = event.target.closest("button[data-buy]");
+  if (!button) return;
 
+  activeProduct = PRODUCTS.find(
+    p => p.id === Number(button.dataset.buy)
+  );
+  if (!activeProduct) return;
+
+  document.getElementById("detail-image").src =
+    activeProduct.image || "";
+  document.getElementById("detail-name").textContent =
+    activeProduct.name;
+  document.getElementById("detail-category").textContent =
+    activeProduct.category;
+  document.getElementById("detail-price").textContent =
+    money(activeProduct.price);
+  document.getElementById("detail-description").textContent =
+    activeProduct.description || "Chưa có mô tả sản phẩm.";
+
+  document.getElementById("product-detail-page")
+    .classList.remove("hidden");
+
+  document.body.classList.add("overflow-hidden");
+});
+
+document.getElementById("detail-back").addEventListener("click", () => {
+  document.getElementById("product-detail-page")
+    .classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+});
+
+document.getElementById("detail-buy").addEventListener("click", () => {
+  if (!activeProduct) return;
+
+  document.getElementById("modal-product").innerHTML = `
+    <div class="flex items-center gap-4">
+      <div class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${activeProduct.gradient} text-3xl">
+        ${activeProduct.emoji}
+      </div>
+      <div class="min-w-0">
+        <p class="font-extrabold">${activeProduct.name}</p>
+        <p class="mt-1 text-sm text-slate-500">${activeProduct.category}</p>
+        <p class="mt-1 font-black text-brand-700">${money(activeProduct.price)}</p>
+      </div>
+    </div>`;
+
+  document.getElementById("selected-product").value = activeProduct.id;
+  document.getElementById("order-result").classList.add("hidden");
+  document.getElementById("order-form").classList.remove("hidden");
+
+  document.getElementById("product-detail-page").classList.add("hidden");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.classList.add("overflow-hidden");
+});
+
+  
     function closeModal() {
       modal.classList.add("hidden");
       modal.classList.remove("flex");
