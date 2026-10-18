@@ -372,8 +372,11 @@ productGrid.addEventListener("click", event => {
     activeProduct.category;
   document.getElementById("detail-price").textContent =
     money(activeProduct.price);
-  document.getElementById("detail-description").textContent =
-    activeProduct.description || "Chưa có mô tả sản phẩm.";
+ document.getElementById("detail-description").textContent =
+  "🔥 Acc Blox Fruits 50 cá\n\n" +
+  "💰 Giá bán: 50.000đ\n\n" +
+  "🎮 Thông tin: Tài khoản Blox Fruits.\n\n" +
+  "📌 Vui lòng đọc kỹ thông tin và xác nhận với shop trước khi mua.";
 
   document.getElementById("product-detail-page")
     .classList.remove("hidden");
