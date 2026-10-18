@@ -234,7 +234,8 @@ tailwind.config = {
     // =========================================
     // SẢN PHẨM (Bạn có thể thêm/sửa tại đây)
     // =========================================
- const PRODUCTS = [
+
+const PRODUCTS = [
   {
     id: 3,
     name: "Lấy ID Apple",
@@ -247,8 +248,22 @@ tailwind.config = {
     description: "Nhấn nút Lấy ID để tiếp tục.",
     image: "https://i.postimg.cc/kgyk2gVx/IMG-5545.jpg",
     externalLink: "https://link4sub.com/note/bZHS"
+  },
+  {
+    id: 4,
+    name: "Acc Blox Fruits 50 cá",
+    category: "Game",
+    price: 50000,
+    oldPrice: 0,
+    emoji: "🍎",
+    gradient: "from-rose-100 to-red-200",
+    tag: "Mới",
+    description: "Tài khoản Blox Fruits 50 cá, giá 50.000đ.",
+    image: "https://i.postimg.cc/HxHM7GpN/IMG-5573.jpg",
+    externalLink: ""
   }
 ];
+
 
     const money = value => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", maximumFractionDigits: 0 }).format(value);
     const productGrid = document.getElementById("product-grid");
