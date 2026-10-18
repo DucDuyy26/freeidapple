@@ -276,7 +276,7 @@ const PRODUCTS = [
     function renderProducts() {
       document.getElementById("product-count").textContent = `${PRODUCTS.length} sản phẩm`;
       productGrid.innerHTML = PRODUCTS.map(p => `
-<article class="product-card mx-auto w-full max-w-[220px] overflow-hidden rounded-2xl border border-[#D58A9B]/60 bg-[#F8E7EB]">
+<article class="product-card mx-auto flex h-full w-full max-w-[220px] flex-col self-stretch overflow-hidden rounded-2xl border border-[#D58A9B]/60 bg-[#F8E7EB]">
         <div class="relative bg-gradient-to-br ${p.gradient} p-3">
             ${p.tag ? `<span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-extrabold text-slate-700">${p.tag}</span>` : ""}
        <div class="grid aspect-[1.55/1] place-items-center overflow-hidden rounded-2xl bg-white/40">
@@ -285,20 +285,21 @@ const PRODUCTS = [
     : '<span class="text-7xl">' + p.emoji + '</span>'}
 </div>
           </div>
-        <div class="p-3">
+      <div class="flex flex-1 flex-col p-4">
             <div class="flex items-center justify-between gap-3"><span class="text-xs font-bold text-brand-600">${p.category}</span></div>
            
 <h3 class="mt-2 text-lg font-extrabold text-[#7A1C34] drop-shadow-sm">${p.name}</h3>
 
-            <p class="mt-2 min-h-[48px] text-sm leading-6 text-slate-500">${p.description || ""}</p>
+           <p class="mt-2 min-h-[48px] flex-1 text-sm leading-6 text-slate-500">${p.description || ""}</p>
            
             
+
 ${p.externalLink
   ? `<a href="${p.externalLink}" target="_blank" rel="noopener noreferrer"
-       class="mt-5 flex w-full items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-extrabold text-white shadow-md transition hover:bg-brand-700">
+       class="mt-auto flex w-full items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-extrabold text-white shadow-md transition hover:bg-brand-700">
        Lấy ID <span class="ml-2" aria-hidden="true">→</span>
      </a>`
-  : `<button data-buy="${p.id}" class="mt-5 w-full rounded-xl bg-brand-600 px-4 py-3 text-sm font-extrabold text-white shadow-md shadow-rose-950/10 transition hover:bg-brand-700">
+  : `<button data-buy="${p.id}" class="mt-auto w-full rounded-xl bg-brand-600 px-4 py-3 text-sm font-extrabold text-white shadow-md shadow-rose-950/10 transition hover:bg-brand-700">
        Mua ngay <span aria-hidden="true">→</span>
      </button>`}
 
@@ -306,6 +307,7 @@ ${p.externalLink
         </article>
       `).join("");
     }
+
 
     productGrid.addEventListener("click", event => {
       const button = event.target.closest("button[data-buy]");
