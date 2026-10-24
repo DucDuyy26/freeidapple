@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f172a" />
-  <title>DUYBOM - STORE</title>
+  <title>DUYBOM - STORE</title>zzz
   <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/P5QwM2mz/B8708FFF-2873-425E-81A6-76FECF2C4C74.png">
   <meta name="description" content="Cửa hàng trực tuyến hiện đại, mua sắm nhanh chóng và thanh toán chuyển khoản VietQR." />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -447,31 +447,6 @@ document.getElementById("close-tiktok-modal").addEventListener("click", () => {
   contactModal.classList.add("hidden");
   contactModal.classList.remove("flex");
 });
-
-  if (!activeProduct) return;
-
-  document.getElementById("modal-product").innerHTML = `
-    <div class="flex items-center gap-4">
-      <div class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br ${activeProduct.gradient} text-3xl">
-        ${activeProduct.emoji}
-      </div>
-      <div class="min-w-0">
-        <p class="font-extrabold">${activeProduct.name}</p>
-        <p class="mt-1 text-sm text-slate-500">${activeProduct.category}</p>
-        <p class="mt-1 font-black text-brand-700">${money(activeProduct.price)}</p>
-      </div>
-    </div>`;
-
-  document.getElementById("selected-product").value = activeProduct.id;
-  document.getElementById("order-result").classList.add("hidden");
-  document.getElementById("order-form").classList.remove("hidden");
-
-  document.getElementById("product-detail-page").classList.add("hidden");
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  document.body.classList.add("overflow-hidden");
-});
-
   
     function closeModal() {
       modal.classList.add("hidden");
